@@ -1,0 +1,6 @@
+framework module Pods_Earn {
+  umbrella header "Pods-Earn-umbrella.h"
+
+  export *
+  module * { export * }
+}
