@@ -9,5 +9,6 @@ target 'Earn' do
   pod 'Alamofire', '~> 4.7'
   pod 'AlamofireSwiftyJSON'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'SCLAlertView'
   
 end
