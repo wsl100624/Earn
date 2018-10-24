@@ -10,8 +10,11 @@ import UIKit
 import Alamofire
 import AlamofireSwiftyJSON
 import SwiftyJSON
+import SCLAlertView
 
-class ViewController: UIViewController {
+
+
+class CalculateViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
@@ -26,6 +29,7 @@ class ViewController: UIViewController {
     
     @IBAction func calculatePressed(_ sender: UIButton) {
         showFinalResult()
+ 
     }
     
     var currentUSDRate : Double = 0.0
@@ -43,6 +47,7 @@ class ViewController: UIViewController {
     let url_USD = "https://enscurrency.com/api/convert?api_key=7a137b95b1694c3289de5d5eea4fbed9&source=CNY&target=USD"
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,6 +57,9 @@ class ViewController: UIViewController {
         addMakeUpBtn()
         
         scrollView.keyboardDismissMode = .interactive
+        
+        
+        
     
     }
     
@@ -64,6 +72,7 @@ class ViewController: UIViewController {
         
         calculatBtn.isEnabled = true
         makeUpBtn.isSelected = false
+        
     }
     
     func addMakeUpBtn() {
@@ -152,7 +161,31 @@ class ViewController: UIViewController {
             
             finalResult = Double(sellPriceInCNY)!*currentUSDRate - Double(originalPriceInUSD)! - Double(weight)!*self.pricePerPound
             calculatBtn.isEnabled = false
-            self.performSegue(withIdentifier: "showResultVC", sender: self)
+            //self.performSegue(withIdentifier: "showResultVC", sender: self)
+            
+            
+            let kSubtitle = "Save this order?"
+            let alertViewIcon = UIImage(named: "dollarSign")
+
+            let appearance = SCLAlertView.SCLAppearance(
+                kWindowWidth: 300,
+                kTitleFont: UIFont.systemFont(ofSize: 50),
+                kButtonFont: UIFont.boldSystemFont(ofSize: 20),
+                showCloseButton: true,
+//                showCircularIcon: true,
+                contentViewCornerRadius: 17.5,
+                buttonCornerRadius : 17.5
+            )
+            
+
+            let resultAlertView = SCLAlertView(appearance: appearance)
+            _ = resultAlertView.addButton("Save") {
+                print("save")
+            }
+            
+            _ = resultAlertView.showSuccess("$" + String(format: "%.2f", finalResult), subTitle: kSubtitle, circleIconImage: alertViewIcon)
+            
+            
         }
         
     }
