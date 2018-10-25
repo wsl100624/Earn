@@ -26,9 +26,25 @@ class ResultViewController: UIViewController {
     }
     
     func addAttributedResultText() {
-        let attributedText = NSMutableAttributedString(string: "$", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 40, weight: .thin)])
-        attributedText.append(NSAttributedString(string: String(format: "%.2f", passedValue), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 75, weight: .thin)]))
-        earnLabel.attributedText = attributedText
+        let positiveAttributedText = NSMutableAttributedString(string: "$",
+                                                               attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 40, weight: .thin)])
+        let negativeAttributedText = NSMutableAttributedString(string: "-$",
+                                                               attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 40, weight: .thin),
+                                                                            NSAttributedString.Key.foregroundColor: UIColor.red])
+        if passedValue >= 0 {
+            positiveAttributedText.append(NSAttributedString(string: String(format: "%.2f", passedValue),
+                                                             attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 75, weight: .thin)]))
+            
+            earnLabel.attributedText = positiveAttributedText
+            
+        } else {
+            let negativeValue = -passedValue
+            negativeAttributedText.append(NSAttributedString(string: String(format: "%.2f", negativeValue),
+                                                             attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 75, weight: .thin),
+                                                                          NSAttributedString.Key.foregroundColor: UIColor.red]))
+            
+            earnLabel.attributedText = negativeAttributedText
+        }
     }
 
     func showNamingWindow() {
