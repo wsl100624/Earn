@@ -11,7 +11,7 @@ import Alamofire
 import AlamofireSwiftyJSON
 import SwiftyJSON
 
-class ViewController: UIViewController {
+class CalculateViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
