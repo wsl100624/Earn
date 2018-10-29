@@ -11,10 +11,12 @@ import Foundation
 public struct Earn {
     var name: String
     var earn: Double
+    var items: String
     
-    init(name: String, earn: Double) {
+    init(name: String, earn: Double, items: String) {
         self.name = name
         self.earn = earn
+        self.items = items
     }
 }
 

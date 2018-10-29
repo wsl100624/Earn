@@ -25,6 +25,7 @@ class CalculateViewController: UIViewController {
 
     
     @IBAction func calculatePressed(_ sender: UIButton) {
+        showButtonPressedAnimate()
         showFinalResult()
     }
     
@@ -158,16 +159,26 @@ class CalculateViewController: UIViewController {
     }
     
     
+    func showButtonPressedAnimate() {
     
+        UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1,
+                       initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+                        self.calculatBtn.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
+        }) { (_) in
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1,
+                           initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+                            self.calculatBtn.transform = CGAffineTransform(scaleX: 1, y: 1)
+            })
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "showResultVC" {
             guard let view = segue.destination as? ResultViewController else { return }
             view.passedValue = finalResult
-            loadingIndicator.stopAnimating()
         } else {
-            print("not showResultVC")
+            print("not show SavingVC")
         }
     }
 }
